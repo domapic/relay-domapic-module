@@ -1,0 +1,36 @@
+{
+  "name": "rasp-relay-domapic-module",
+  "version": "1.0.0-alpha.1",
+  "description": "Domapic module for controlling a relay on a Raspberry Pi",
+  "main": "server.js",
+  "scripts": {
+    "test": "narval"
+  },
+  "dependencies": {
+    "domapic-service": "1.0.0-alpha.2"
+  },
+  "devDependencies": {
+    "coveralls": "3.0.2",
+    "narval": "2.2.1"
+  },
+  "files": [
+    "/lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/javierbrea/rasp-relay-domapic-module.git"
+  },
+  "keywords": [
+    "domapic",
+    "raspberry",
+    "relay",
+    "iot",
+    "api"
+  ],
+  "author": "Javier Brea",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/javierbrea/rasp-relay-domapic-module/issues"
+  },
+  "homepage": "https://github.com/javierbrea/rasp-relay-domapic-module#readme"
+}
