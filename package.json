@@ -4,7 +4,8 @@
   "description": "Domapic module for controlling a relay on a Raspberry Pi",
   "main": "server.js",
   "scripts": {
-    "test": "narval"
+    "test": "narval",
+    "coveralls": "cat ./.coverage/lcov.info | coveralls"
   },
   "dependencies": {
     "domapic-service": "1.0.0-alpha.2"
