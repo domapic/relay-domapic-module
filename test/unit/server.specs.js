@@ -2,32 +2,29 @@ const path = require('path')
 
 const test = require('narval')
 
-const domapic = require('domapic-service')
+const DomapicMocks = require('./Domapic.mocks')
+const RelayHandlerMocks = require('./lib/RelayHandler.mocks')
 
 test.describe('server', () => {
-  let sandbox
-  let start
+  let domapic
+  let relayHandler
 
   test.before(() => {
-    sandbox = test.sinon.createSandbox()
-    start = sandbox.stub()
-    sandbox.stub(domapic, 'createModule').resolves({
-      start
-    })
+    domapic = new DomapicMocks()
+    relayHandler = new RelayHandlerMocks()
     require('../../server')
   })
 
   test.after(() => {
-    sandbox.restore()
+    domapic.restore()
+    relayHandler.restore()
   })
 
   test.it('should have created a Domapic Module, passing the package path', () => {
-    test.expect(domapic.createModule).to.have.been.calledWith({
-      packagePath: path.resolve(__dirname, '..', '..')
-    })
+    test.expect(domapic.stubs.createModule.getCall(0).args[0].packagePath).to.equal(path.resolve(__dirname, '..', '..'))
   })
 
   test.it('should have called to start the server', () => {
-    test.expect(start).to.have.been.called()
+    test.expect(domapic.stubs.module.start).to.have.been.called()
   })
 })

@@ -47,10 +47,6 @@ domapic.createModule({
       }
     }
   })
-  try {
-    await relay.init()
-  } catch (error) {
-    dmpcModule.tracer.error(error)
-  }
+  await relay.init()
   return dmpcModule.start()
 })
