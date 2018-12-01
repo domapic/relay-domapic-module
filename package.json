@@ -1,24 +1,32 @@
 {
-  "name": "rasp-relay-domapic-module",
+  "name": "relay-domapic-module",
   "version": "1.0.0-alpha.1",
-  "description": "Domapic module for controlling a relay on a Raspberry Pi",
+  "description": "Domapic module for controlling a relay",
   "main": "server.js",
+  "bin": {
+    "relay": "./bin/relay"
+  },
   "scripts": {
-    "test": "narval"
+    "test": "narval",
+    "coveralls": "cat ./.coverage/lcov.info | coveralls",
+    "relay": "./bin/relay"
   },
   "dependencies": {
-    "domapic-service": "1.0.0-alpha.2"
+    "death": "1.1.0",
+    "domapic-service": "1.0.0-alpha.3",
+    "onoff": "3.2.2"
   },
   "devDependencies": {
     "coveralls": "3.0.2",
-    "narval": "2.2.1"
+    "narval": "2.2.1",
+    "mockery": "2.1.0"
   },
   "files": [
     "/lib"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/javierbrea/rasp-relay-domapic-module.git"
+    "url": "git+https://github.com/javierbrea/relay-domapic-module.git"
   },
   "keywords": [
     "domapic",
@@ -30,7 +38,7 @@
   "author": "Javier Brea",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/javierbrea/rasp-relay-domapic-module/issues"
+    "url": "https://github.com/javierbrea/relay-domapic-module/issues"
   },
-  "homepage": "https://github.com/javierbrea/rasp-relay-domapic-module#readme"
+  "homepage": "https://github.com/javierbrea/relay-domapic-module#readme"
 }
