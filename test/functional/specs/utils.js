@@ -2,6 +2,7 @@
 
 const path = require('path')
 const fs = require('fs')
+const testUtils = require('narval/utils')
 
 const requestPromise = require('request-promise')
 
@@ -67,11 +68,15 @@ class Connection {
   }
 }
 
+const moduleLogs = (time = 200) => waitOn(time)
+  .then(() => testUtils.logs.combined('module'))
+
 module.exports = {
   waitOn,
   readStorage,
   Connection,
   DOMAPIC_PATH,
   SERVICE_HOST,
-  SERVICE_PORT
+  SERVICE_PORT,
+  moduleLogs
 }

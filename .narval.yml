@@ -25,7 +25,7 @@ schemas:
     local: &local-service
       command: test/functional/commands/start-module.sh
       env: *local-service-env
-    dockert: &docker-service
+    docker: &docker-service
       command: test/functional/commands/start-module.sh
       env: *docker-service-env
   test: &functional-test
@@ -55,7 +55,7 @@ suites:
           dir: .coverage
   functional:
     - name: api
-      describe: should set relay status and save data for next restart
+      describe: should set relay status and save data in storage for next restart
       before: *clean
       services:
         - name: module
@@ -65,5 +65,27 @@ suites:
       test:
         <<: *functional-test
         specs:
+          - test/functional/specs/api.specs.js
+      coverage: *disable-coverage
+    - name: config
+      describe: should init the relay with provided configuration
+      before: *clean
+      services:
+        - name: module
+          abort-on-error: true
+          local:
+            <<: *local-service
+            env:  
+              <<: *local-service-env
+              service_extra_options: --initialStatus=true --gpio=54 --invert=true
+          docker:
+            <<: *docker-service
+            env:
+              <<: *docker-service-env
+              service_extra_options: --initialStatus=true --gpio=54 --invert=true
+      test:
+        <<: *functional-test
+        specs:
+          - test/functional/specs/config.specs.js
           - test/functional/specs/api.specs.js
       coverage: *disable-coverage

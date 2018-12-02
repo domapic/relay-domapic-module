@@ -27,6 +27,13 @@ test.describe('switch api', function () {
       })
     })
 
+    test.it('should have tried to emit a switch event', () => {
+      return utils.moduleLogs()
+        .then(logs => {
+          test.expect(logs).to.contain('Error sending "switch" event')
+        })
+    })
+
     test.it('should have saved status to storage', () => {
       return utils.readStorage()
         .then(storage => {
