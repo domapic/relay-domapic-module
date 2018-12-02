@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-node server.js --path=.test ${service_extra_options}
+node server.js --path=${domapic_path} ${service_extra_options}
