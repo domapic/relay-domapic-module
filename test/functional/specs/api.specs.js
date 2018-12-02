@@ -7,7 +7,11 @@ test.describe('switch api', function () {
   let connection
 
   test.before(() => {
-    connection = new utils.Connection()
+    return utils.waitOn(3000)
+      .then(() => {
+        connection = new utils.Connection()
+        return Promise.resolve()
+      })
   })
 
   test.describe('switch action', () => {

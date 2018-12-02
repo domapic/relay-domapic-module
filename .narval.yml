@@ -5,7 +5,7 @@ schemas:
     - index.js
     - server.js
   coverage: &disable-coverage
-      enabled: false
+    enabled: false
   envs:
     local-service: &local-service-env
       service_port: 3000
