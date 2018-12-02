@@ -16,6 +16,8 @@ This package starts an API Rest server that controls a relay. It is intended to 
 
 It can be used alone, but also can be connected to a [Domapic Controller][domapic-controller-url] to get the most out of it.
 
+![Relay connection schema](assets/fritz_relay_schema.png)
+
 ## Installation
 
 ```bash
