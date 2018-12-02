@@ -1,8 +1,8 @@
 {
   "name": "relay-domapic-module",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-beta.1",
   "description": "Domapic module for controlling a relay",
-  "main": "server.js",
+  "main": "index.js",
   "bin": {
     "relay": "./bin/relay"
   },
@@ -19,10 +19,14 @@
   "devDependencies": {
     "coveralls": "3.0.2",
     "narval": "2.2.1",
-    "mockery": "2.1.0"
+    "mockery": "2.1.0",
+    "request-promise": "4.2.2"
   },
   "files": [
-    "/lib"
+    "/lib",
+    "/bin",
+    "server.js",
+    "index.js"
   ],
   "repository": {
     "type": "git",
@@ -33,7 +37,8 @@
     "raspberry",
     "relay",
     "iot",
-    "api"
+    "api",
+    "domotic"
   ],
   "author": "Javier Brea",
   "license": "MIT",

@@ -6,14 +6,38 @@ const MODULE = 'domapic-service'
 
 const Mock = function () {
   let sandbox = test.sinon.createSandbox()
+  let resolveStartCalled
+
+  const resolveOnStartCalledPromise = new Promise(resolve => {
+    resolveStartCalled = resolve
+  })
 
   const moduleStubs = {
-    start: sandbox.stub(),
-    register: sandbox.stub()
+    start: sandbox.stub().callsFake(() => {
+      resolveStartCalled()
+      return Promise.resolve()
+    }),
+    register: sandbox.stub(),
+    events: {
+      emit: sandbox.stub()
+    },
+    config: {
+      get: sandbox.stub().resolves()
+    },
+    storage: {
+      get: sandbox.stub().resolves(),
+      set: sandbox.stub().resolves()
+    },
+    tracer: {
+      info: sandbox.stub().resolves(),
+      debug: sandbox.stub().resolves(),
+      error: sandbox.stub().resolves()
+    }
   }
 
   const stubs = {
-    createModule: sandbox.stub().resolves(moduleStubs)
+    createModule: sandbox.stub().resolves(moduleStubs),
+    cli: sandbox.stub()
   }
 
   const restore = () => {
@@ -28,6 +52,9 @@ const Mock = function () {
     stubs: {
       ...stubs,
       module: moduleStubs
+    },
+    utils: {
+      resolveOnStartCalled: () => resolveOnStartCalledPromise
     }
   }
 }
