@@ -20,6 +20,18 @@ const Mock = function () {
     register: sandbox.stub(),
     events: {
       emit: sandbox.stub()
+    },
+    config: {
+      get: sandbox.stub().resolves()
+    },
+    storage: {
+      get: sandbox.stub().resolves(),
+      set: sandbox.stub().resolves()
+    },
+    tracer: {
+      info: sandbox.stub().resolves(),
+      debug: sandbox.stub().resolves(),
+      error: sandbox.stub().resolves()
     }
   }
 

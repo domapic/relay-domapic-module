@@ -1,6 +1,5 @@
 const test = require('narval')
 
-const RelayMocks = require('./Relay.mocks')
 const OnoffMocks = require('./Onoff.mocks')
 const DeathMocks = require('./Death.mocks')
 
@@ -8,18 +7,15 @@ test.describe('Relay', () => {
   let Relay
   let relay
   let onoffMocks
-  let relayMocks
   let deathMocks
 
   test.beforeEach(() => {
-    relayMocks = new RelayMocks()
     onoffMocks = new OnoffMocks()
     deathMocks = new DeathMocks()
     Relay = require('../../../lib/Relay')
   })
 
   test.afterEach(() => {
-    relayMocks.restore()
     deathMocks.restore()
     onoffMocks.restore()
   })
