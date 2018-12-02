@@ -3,14 +3,15 @@ const path = require('path')
 const test = require('narval')
 
 const DomapicMocks = require('../Domapic.mocks')
-const options = require('../../../lib/options')
 
 test.describe('cli', () => {
   const packagePath = path.resolve(__dirname, '..', '..', '..')
   let domapic
+  let options
 
   test.before(() => {
     domapic = new DomapicMocks()
+    options = require('../../../lib/options')
     require('../../../lib/cli')
   })
 

@@ -1,28 +1,23 @@
-const death = require('death')
 const test = require('narval')
 
 const OnoffMocks = require('./Onoff.mocks')
 
 test.describe('server', () => {
   let onoff
-  let libs
+  let onoffMock
 
   test.before(() => {
-    onoff = new OnoffMocks()
-    libs = require('../../../lib/libs')
+    onoffMock = new OnoffMocks()
+    onoff = require('../../../lib/onoff')
   })
 
   test.after(() => {
-    onoff.restore()
+    onoffMock.restore()
   })
 
-  test.it('should return death', () => {
-    test.expect(libs.death).to.equal(death)
-  })
-
-  test.describe('onoff method', () => {
+  test.describe('init method', () => {
     test.it('should return onoff library', () => {
-      test.expect(libs.onoff()).to.equal(onoff.stubs)
+      test.expect(onoff.init()).to.equal(onoffMock.stubs)
     })
   })
 })

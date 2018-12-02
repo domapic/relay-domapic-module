@@ -7,7 +7,8 @@ const enable = () => {
     enabled = true
     mockery.enable({
       warnOnReplace: false,
-      warnOnUnregistered: false
+      warnOnUnregistered: false,
+      useCleanCache: true
     })
   }
 }
@@ -18,6 +19,7 @@ const register = (moduleName, mock) => {
 }
 
 const deregister = moduleName => {
+  mockery.resetCache()
   mockery.deregisterMock(moduleName)
 }
 
