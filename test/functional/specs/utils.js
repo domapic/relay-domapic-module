@@ -3,7 +3,6 @@
 const path = require('path')
 const fs = require('fs')
 const testUtils = require('narval/utils')
-const childProcess = require('child_process')
 
 const requestPromise = require('request-promise')
 
@@ -41,15 +40,8 @@ const request = (uri, options = {}) => {
   return requestPromise(Object.assign(defaultOptions, options))
 }
 
-const readStorage = () => {
-  const folders = childProcess.spawnSync('ls', ['-la'], {
-    cwd: path.resolve(__dirname, '..', '..', '..'),
-    encoding: 'utf8'
-  })
-  console.log(folders.stdout)
-  return readFile(path.resolve(__dirname, '..', '..', '..', DOMAPIC_PATH, '.domapic', 'relay-domapic-module', 'storage', 'service.json'))
-    .then(data => Promise.resolve(JSON.parse(data)))
-}
+const readStorage = () => readFile(path.resolve(__dirname, '..', '..', '..', DOMAPIC_PATH, '.domapic', 'relay-domapic-module', 'storage', 'service.json'))
+  .then(data => Promise.resolve(JSON.parse(data)))
 
 const controllerApiKey = (property, value) => readStorage()
   .then(data => Promise.resolve(data.apiKeys.find(apiKeyData => apiKeyData.user === 'controller')))
