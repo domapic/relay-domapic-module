@@ -8,7 +8,9 @@ const Mock = function () {
   let sandbox = test.sinon.createSandbox()
 
   const instanceStubs = {
-    init: sandbox.stub()
+    init: sandbox.stub().resolves(),
+    setStatus: sandbox.stub().resolves(),
+    toggle: sandbox.stub().resolves()
   }
 
   const stub = sandbox.stub().callsFake(function () {
