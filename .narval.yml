@@ -98,3 +98,16 @@ suites:
           - test/functional/specs/config.specs.js
           - test/functional/specs/api.specs.js
       coverage: *disable-coverage
+    - name: persisted-status
+      describe: should remember last relay status when restarted
+      services:
+        - name: module
+          abort-on-error: true
+          local: *local-service
+          docker: *docker-service
+      test:
+        <<: *functional-test
+        specs:
+          - test/functional/specs/persisted-status.specs.js
+          - test/functional/specs/api.specs.js
+      coverage: *disable-coverage

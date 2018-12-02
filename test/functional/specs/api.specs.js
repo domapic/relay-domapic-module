@@ -7,11 +7,16 @@ test.describe('switch api', function () {
   let connection
 
   test.before(() => {
-    return utils.waitOn(1000)
-      .then(() => {
-        connection = new utils.Connection()
-        return Promise.resolve()
-      })
+    connection = new utils.Connection()
+  })
+
+  test.after(() => {
+    return connection.request('/abilities/switch/action', {
+      method: 'POST',
+      body: {
+        data: true
+      }
+    })
   })
 
   test.describe('switch action', () => {
