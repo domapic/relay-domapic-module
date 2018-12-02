@@ -4,6 +4,7 @@ schemas:
     - test
     - index.js
     - server.js
+    - bin
   coverage: &disable-coverage
     enabled: false
   envs:
