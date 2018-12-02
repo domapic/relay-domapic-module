@@ -19,7 +19,8 @@
   "devDependencies": {
     "coveralls": "3.0.2",
     "narval": "2.2.1",
-    "mockery": "2.1.0"
+    "mockery": "2.1.0",
+    "request-promise": "4.2.2"
   },
   "files": [
     "/lib"
