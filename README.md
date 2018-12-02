@@ -16,7 +16,7 @@ This package starts an API Rest server that controls a relay. It is intended to 
 
 It can be used alone, but also can be connected to a [Domapic Controller][domapic-controller-url] to get the most out of it.
 
-![Relay connection schema](assets/fritz_relay_schema.png)
+![Relay connection schema][relay-schema-image]
 
 ## Installation
 
@@ -55,7 +55,7 @@ relay start --help
 
 When the server is started, you can browse to the provided Swagger interface to get all the info about the api resources:
 
-![Swagger ui](assets/swagger.png)
+![Swagger ui][relay-swagger-image]
 
 Apart of all api methods common to all [Domapic Services][domapic-service-url], the server provides two [_Domapic Abilities_][domapic-service-abilities-url] for controlling the relay, which generates three API resources:
 
@@ -116,5 +116,8 @@ If you don't want to use the built-in background runner, you can start the serve
 [domapic-service-abilities-url]: https://github.com/domapic/domapic-service#abilities
 [domapic-service-url]: https://github.com/domapic/domapic-service
 [pm2-url]: http://pm2.keymetrics.io/
+
+[relay-schema-image]: http://domapic.com/assets/fritz_relay_schema.png
+[relay-swagger-image]: http://domapic.com/assets/relay-swagger.png
 
 
