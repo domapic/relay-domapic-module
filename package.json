@@ -12,10 +12,8 @@
     "relay": "./bin/relay"
   },
   "dependencies": {
-    "death": "1.1.0",
     "domapic-service": "1.0.0-alpha.3",
-    "gpio-out-domapic": "1.0.0",
-    "onoff": "3.2.2"
+    "gpio-out-domapic": "1.0.0"
   },
   "devDependencies": {
     "coveralls": "3.0.2",
