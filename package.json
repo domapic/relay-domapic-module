@@ -2,7 +2,7 @@
   "name": "relay-domapic-module",
   "version": "1.0.0-beta.1",
   "description": "Domapic module for controlling a relay",
-  "main": "index.js",
+  "main": "server.js",
   "bin": {
     "relay": "./bin/relay"
   },
@@ -14,6 +14,7 @@
   "dependencies": {
     "death": "1.1.0",
     "domapic-service": "1.0.0-alpha.3",
+    "gpio-out-domapic": "1.0.0",
     "onoff": "3.2.2"
   },
   "devDependencies": {
@@ -25,8 +26,7 @@
   "files": [
     "/lib",
     "/bin",
-    "server.js",
-    "index.js"
+    "server.js"
   ],
   "repository": {
     "type": "git",

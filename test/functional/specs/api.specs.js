@@ -46,7 +46,7 @@ test.describe('switch api', function () {
     test.it('should have saved status to storage', () => {
       return utils.readStorage()
         .then(storage => {
-          test.expect(storage.initialStatus).to.equal(true)
+          test.expect(utils.gpioStored(storage)).to.equal(true)
         })
     })
 
@@ -79,7 +79,7 @@ test.describe('switch api', function () {
     test.it('should have saved status to storage', () => {
       return utils.readStorage()
         .then(storage => {
-          test.expect(storage.initialStatus).to.equal(false)
+          test.expect(utils.gpioStored(storage)).to.equal(false)
         })
     })
 

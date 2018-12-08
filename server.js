@@ -3,15 +3,21 @@
 const path = require('path')
 
 const domapic = require('domapic-service')
+const gpioOut = require('gpio-out-domapic')
 
-const RelayHandler = require('./lib/RelayHandler')
+const { GPIO, INITIAL_STATUS, INVERT, REMEMBER_LAST_STATUS } = require('./lib/statics')
 const options = require('./lib/options')
 
 domapic.createModule({
   packagePath: path.resolve(__dirname),
   customConfig: options
 }).then(async dmpcModule => {
-  const relay = new RelayHandler(dmpcModule)
+  const relay = new gpioOut.Gpio(dmpcModule, {}, {
+    gpio: GPIO,
+    initialStatus: INITIAL_STATUS,
+    invert: INVERT,
+    rememberLastStatus: REMEMBER_LAST_STATUS
+  })
 
   await dmpcModule.register({
     switch: {
