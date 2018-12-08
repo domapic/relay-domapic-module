@@ -2,7 +2,6 @@ schemas:
   bind: &bind
     - lib
     - test
-    - index.js
     - server.js
     - bin
   coverage: &disable-coverage
