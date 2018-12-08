@@ -10,6 +10,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 ### Removed
 
+## [1.0.0] - 2018-12-08
+### Changed
+- Gpio Handler functionality migrated to gpio-out-domapic package. Added as dependency.
+
+### Added
+- New option "remember", which defines if relay should remember last state when restarted.
+
 ## [1.0.0-beta.1] - 2018-12-02
 ### Added
 - First prerelease

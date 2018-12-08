@@ -2,7 +2,6 @@ schemas:
   bind: &bind
     - lib
     - test
-    - index.js
     - server.js
     - bin
   coverage: &disable-coverage
@@ -12,10 +11,12 @@ schemas:
       service_port: 3000
       service_host_name: localhost
       domapic_path: .test
+      service_extra_options: --remember=true
     docker-service: &docker-service-env
       service_port: 3000
       service_host_name: module-container
       domapic_path: .shared
+      service_extra_options: --remember=true
   clean: &clean
     local:
       command: test/functional/commands/local-clean.sh
@@ -93,25 +94,53 @@ suites:
             <<: *local-service
             env:  
               <<: *local-service-env
-              service_extra_options: --initialStatus=true --gpio=54 --invert=true
+              service_extra_options: --remember=true --initialStatus=true --gpio=54 --invert=true
           docker:
             <<: *docker-service
             env:
               <<: *docker-service-env
-              service_extra_options: --initialStatus=true --gpio=54 --invert=true
+              service_extra_options: --remember=true --initialStatus=true --gpio=54 --invert=true
       test:
         <<: *functional-test
         specs:
           - test/functional/specs/config.specs.js
           - test/functional/specs/api.specs.js
       coverage: *disable-coverage
+    - name: non-persisted-status
+      describe: should not remember last relay status when restarted
+      services:
+        - name: module
+          abort-on-error: true
+          local:
+            <<: *local-service
+            env:  
+              <<: *local-service-env
+              service_extra_options: --gpio=54 --invert=true
+          docker:
+            <<: *docker-service
+            env:
+              <<: *docker-service-env
+              service_extra_options: --gpio=54 --invert=true
+      test:
+        <<: *functional-test
+        specs:
+          - test/functional/specs/non-persisted-status.specs.js
+      coverage: *disable-coverage
     - name: persisted-status
       describe: should remember last relay status when restarted
       services:
         - name: module
           abort-on-error: true
-          local: *local-service
-          docker: *docker-service
+          local:
+            <<: *local-service
+            env:  
+              <<: *local-service-env
+              service_extra_options: --remember=true --gpio=54 --invert=true
+          docker:
+            <<: *docker-service
+            env:
+              <<: *docker-service-env
+              service_extra_options: --remember=true --gpio=54 --invert=true
       test:
         <<: *functional-test
         specs:
@@ -141,12 +170,12 @@ suites:
             <<: *local-service-cli
             env:  
               <<: *local-service-env
-              service_extra_options: --initialStatus=true --gpio=54 --invert=true
+              service_extra_options: --remember=true --initialStatus=true --gpio=54 --invert=true
           docker:
             <<: *docker-service-cli
             env:
               <<: *docker-service-env
-              service_extra_options: --initialStatus=true --gpio=54 --invert=true
+              service_extra_options: --remember=true --initialStatus=true --gpio=54 --invert=true
       test:
         <<: *functional-test
         specs:
@@ -161,8 +190,16 @@ suites:
       services:
         - name: module
           abort-on-error: true
-          local: *local-service-cli
-          docker: *docker-service-cli
+          local:
+            <<: *local-service
+            env:  
+              <<: *local-service-env
+              service_extra_options: --remember=true --gpio=54 --invert=true
+          docker:
+            <<: *docker-service
+            env:
+              <<: *docker-service-env
+              service_extra_options: --remember=true --gpio=54 --invert=true
       test:
         <<: *functional-test
         specs:

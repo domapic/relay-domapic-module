@@ -1,8 +1,8 @@
 const test = require('narval')
 
-const mockery = require('../mockery')
+const mockery = require('./mockery')
 
-const MODULE = './lib/RelayHandler'
+const MODULE = 'gpio-out-domapic'
 
 const Mock = function () {
   let sandbox = test.sinon.createSandbox()
@@ -13,9 +13,11 @@ const Mock = function () {
     toggle: sandbox.stub().resolves()
   }
 
-  const stub = sandbox.stub().callsFake(function () {
-    return instanceStubs
-  })
+  const stub = {
+    Gpio: sandbox.stub().callsFake(function () {
+      return instanceStubs
+    })
+  }
 
   const restore = () => {
     sandbox.restore()
@@ -27,7 +29,7 @@ const Mock = function () {
   return {
     restore,
     stubs: {
-      Constructor: stub,
+      Constructor: stub.Gpio,
       instance: instanceStubs
     }
   }

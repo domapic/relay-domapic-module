@@ -71,6 +71,13 @@ class Connection {
 const moduleLogs = (time = 200) => waitOn(time)
   .then(() => testUtils.logs.combined('module'))
 
+const gpioStored = storage => {
+  if (typeof storage.gpio_2_state !== 'undefined') {
+    return storage.gpio_2_state
+  }
+  return storage.gpio_54_state
+}
+
 module.exports = {
   waitOn,
   readStorage,
@@ -78,5 +85,6 @@ module.exports = {
   DOMAPIC_PATH,
   SERVICE_HOST,
   SERVICE_PORT,
-  moduleLogs
+  moduleLogs,
+  gpioStored
 }

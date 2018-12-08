@@ -4,7 +4,7 @@
 
 [![Build status][travisci-image]][travisci-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Quality Gate][quality-gate-image]][quality-gate-url] [![js-standard-style][standard-image]][standard-url]
 
-[![NPM dependencies][npm-dependencies-image]][npm-dependencies-url] [![Last commit][last-commit-image]][last-commit-url] <!--[![Last release][release-image]][release-url] -->
+[![NPM dependencies][npm-dependencies-image]][npm-dependencies-url] [![Last commit][last-commit-image]][last-commit-url] [![Last release][release-image]][release-url]
 
 [![NPM downloads][npm-downloads-image]][npm-downloads-url] [![License][license-image]][license-url]
 
@@ -44,11 +44,11 @@ The module, apart of all common [domapic services options][domapic-service-optio
 
 * `gpio` - Number defining the Gpio where the relay to be controlled is connected.
 * `initialStatus` - Boolean defining the initial status of the relay. Only used first time it is started, next times the server will remember the last status set. _Default is `false`_
-* `invert` - If true, the values read from or written to the GPIO should be inverted. Equivalent to `activeLow` option of the `onoff` library .
+* `invert` - If true, the values read from or written to the GPIO should be inverted. Equivalent to `activeLow` option of the [onoff][onoff-url] library.
+* `remember` - If true, the relay will remember last status when restarted.
 
 ```bash
-# Displays help with detailed information about all available options 
-relay start --help
+relay --gpio=2 --initialStatus=true --remember=true --invert=false
 ```
 
 ## Rest API
