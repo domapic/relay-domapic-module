@@ -12,7 +12,7 @@
 
 ## Intro
 
-This package starts an API Rest server that controls a relay. It is intended to be used in a Raspberry Pi or any other system supporting the [onoff][onoff-url] library, such as C.H.I.P. or BeagleBone.
+This package starts a Domapic Module with an ability called "relay" that handles a GPIO in "out" mode. It is intended to be used in a Raspberry Pi or any other system supporting the [onoff][onoff-url] library, such as C.H.I.P. or BeagleBone.
 
 It can be used alone, but also can be connected to a [Domapic Controller][domapic-controller-url] to get the most out of it.
 
@@ -48,22 +48,36 @@ The module, apart of all common [domapic services options][domapic-service-optio
 * `remember` - If true, the relay will remember last status when restarted.
 
 ```bash
-relay --gpio=2 --initialStatus=true --remember=true --invert=false
+relay --gpio=2 --initialStatus=true --remember=true --invert=false --save
 ```
 
-## Rest API
+## Connection with Domapic Controller
+
+Connect the module with a Domapic Controller providing the Controller url and connection token (you'll find it the Controller logs when it is started):
+
+```bash
+relay start --controller=http://192.168.1.110:3000 --controllerApiKey=foo-controller-api-key
+```
+
+Now, the module can be controlled through the Controller interface, or installed plugins.
+
+## Stand alone usage
+
+Domapic modules are intended to be used through Domapic Controller, but can be used as an stand-alone service as well. Follow next instructions to use the built-in api by your own:
+
+### Rest API
 
 When the server is started, you can browse to the provided Swagger interface to get all the info about the api resources:
 
 ![Swagger ui][relay-swagger-image]
 
-Apart of all api methods common to all [Domapic Services][domapic-service-url], the server provides two [_Domapic Abilities_][domapic-service-abilities-url] for controlling the relay, which generates three API resources:
+Apart of all api methods common to all [Domapic Services][domapic-service-url], the server provides two [_Domapic Abilities_][domapic-service-abilities-url] for controlling the relay, which generates three specific API resources:
 
 * `/api/abilities/switch/action` - Changes the relay status to the provided value.
 * `/api/abilities/switch/state` - Returns the relay status.
 * `/api/abilities/toggle/action` - Changes the relay status inverting the current value.
 
-## Authentication
+### Authentication
 
 The server includes the [Domapic Services][domapic-service-url] authentication method, which is disabled by default for `127.0.0.1`.
 You can disable the authentication using the `--authDisabled` option (not recommended if your server is being exposed to the Internet). Read more about [available options in the domapic services documentation][domapic-service-options-url].
