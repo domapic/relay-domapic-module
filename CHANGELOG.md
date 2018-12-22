@@ -11,8 +11,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 
 ## [1.1.0] - 2018-12-22
-### Changed
+### Added
 - Add default configuration for "homebridge-domapic-plugin"
+
+### Changed
+- Upgrade domapic-service version
 
 ## [1.0.0] - 2018-12-08
 ### Changed
