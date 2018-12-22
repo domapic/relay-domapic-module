@@ -1,0 +1,23 @@
+[
+  {
+    "pluginPackageName": "homebridge-domapic-plugin",
+    "config": {
+      "accessories": [
+        {
+          "accessory": "Switch",
+          "characteristics": [
+            {
+              "characteristic": "On",
+              "get": {
+                "ability": "switch"
+              },
+              "set": {
+                "ability": "switch"
+              } 
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

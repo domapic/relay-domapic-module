@@ -32,7 +32,8 @@ const Mock = function () {
       info: sandbox.stub().resolves(),
       debug: sandbox.stub().resolves(),
       error: sandbox.stub().resolves()
-    }
+    },
+    addPluginConfig: sandbox.stub().resolves()
   }
 
   const stubs = {
