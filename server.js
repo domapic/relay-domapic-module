@@ -8,6 +8,8 @@ const gpioOut = require('gpio-out-domapic')
 const { GPIO, INITIAL_STATUS, INVERT, REMEMBER_LAST_STATUS } = require('./lib/statics')
 const options = require('./lib/options')
 
+const pluginConfigs = require('./lib/plugins')
+
 domapic.createModule({
   packagePath: path.resolve(__dirname),
   customConfig: options
@@ -53,6 +55,7 @@ domapic.createModule({
       }
     }
   })
+  await dmpcModule.addPluginConfig(pluginConfigs)
   await relay.init()
   return dmpcModule.start()
 })
