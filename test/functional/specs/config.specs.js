@@ -18,7 +18,8 @@ test.describe('module configuration', function () {
         test.expect(response.statusCode).to.equal(200),
         test.expect(response.body.initialStatus).to.equal(true),
         test.expect(response.body.gpio).to.equal(54),
-        test.expect(response.body.invert).to.equal(true)
+        test.expect(response.body.invert).to.equal(true),
+        test.expect(response.body.pressTime).to.equal(2000)
       ])
     })
   })
