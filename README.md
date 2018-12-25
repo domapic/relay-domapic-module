@@ -42,10 +42,11 @@ relay logs #--lines=300
 
 The module, apart of all common [domapic services options][domapic-service-options-url], provides custom options for configuring the relay:
 
-* `gpio` - Number defining the Gpio where the relay to be controlled is connected.
-* `initialStatus` - Boolean defining the initial status of the relay. Only used first time it is started, next times the server will remember the last status set. _Default is `false`_
-* `invert` - If true, the values read from or written to the GPIO should be inverted. Equivalent to `activeLow` option of the [onoff][onoff-url] library.
-* `remember` - If true, the relay will remember last status when restarted.
+* `gpio` - `<number>` Number defining the Gpio where the relay to be controlled is connected.
+* `initialStatus` - `<boolean>` Boolean defining the initial status of the relay. Only used first time it is started, next times the server will remember the last status set. _Default is `false`_
+* `invert` - `<boolean>` If true, the values read from or written to the GPIO should be inverted. Equivalent to `activeLow` option of the [onoff][onoff-url] library.
+* `remember` - `<boolean>` If true, the relay will remember last status when restarted.
+* `pressTime` - `<number>` Defines time in miliseconds that relay will be activated when short-press action is executed. (Default is 2000)
 
 ```bash
 relay --gpio=2 --initialStatus=true --remember=true --invert=false --save
@@ -71,11 +72,12 @@ When the server is started, you can browse to the provided Swagger interface to 
 
 ![Swagger ui][relay-swagger-image]
 
-Apart of all api methods common to all [Domapic Services][domapic-service-url], the server provides two [_Domapic Abilities_][domapic-service-abilities-url] for controlling the relay, which generates three specific API resources:
+Apart of all api methods common to all [Domapic Services][domapic-service-url], the server provides extra [_Domapic Abilities_][domapic-service-abilities-url] for controlling the relay, which generates specific API resources:
 
 * `/api/abilities/switch/action` - Changes the relay status to the provided value.
 * `/api/abilities/switch/state` - Returns the relay status.
 * `/api/abilities/toggle/action` - Changes the relay status inverting the current value.
+* `/api/abilities/short-press/action` - Changes the relay status inverting the current value during a defined period of time, and revert it again to original state. The period of time is defined by the `pressTime` option.
 
 ### Authentication
 
