@@ -72,7 +72,7 @@ When the server is started, you can browse to the provided Swagger interface to 
 
 ![Swagger ui][relay-swagger-image]
 
-Apart of all api methods common to all [Domapic Services][domapic-service-url], the server provides two [_Domapic Abilities_][domapic-service-abilities-url] for controlling the relay, which generates three specific API resources:
+Apart of all api methods common to all [Domapic Services][domapic-service-url], the server provides extra [_Domapic Abilities_][domapic-service-abilities-url] for controlling the relay, which generates specific API resources:
 
 * `/api/abilities/switch/action` - Changes the relay status to the provided value.
 * `/api/abilities/switch/state` - Returns the relay status.
