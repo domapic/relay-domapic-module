@@ -16,6 +16,21 @@
               } 
             }
           ]
+        },
+        {
+          "accessory": "Switch",
+          "name": "Short press",
+          "characteristics": [
+            {
+              "characteristic": "On",
+              "get": {
+                "fixture": false
+              },
+              "set": {
+                "ability": "shortPress"
+              } 
+            }
+          ]
         }
       ]
     }
