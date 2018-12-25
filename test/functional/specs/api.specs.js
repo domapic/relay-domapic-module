@@ -96,4 +96,41 @@ test.describe('switch api', function () {
       })
     })
   })
+
+  test.describe('shortPress action', () => {
+    test.it('should invert relay status', () => {
+      return connection.request('/abilities/short-press/action', {
+        method: 'POST'
+      }).then(response => {
+        return connection.request('/abilities/switch/state', {
+          method: 'GET'
+        }).then(statusResponse => {
+          return Promise.all([
+            test.expect(response.statusCode).to.equal(200),
+            test.expect(response.body).to.be.undefined(),
+            test.expect(statusResponse.statusCode).to.equal(200),
+            test.expect(statusResponse.body).to.deep.equal({
+              data: true
+            })
+          ])
+        })
+      })
+    })
+
+    test.it('should have reverted status to original value', () => {
+      return utils.waitOn(2000)
+        .then(() => {
+          return connection.request('/abilities/switch/state', {
+            method: 'GET'
+          }).then(response => {
+            return Promise.all([
+              test.expect(response.statusCode).to.equal(200),
+              test.expect(response.body).to.deep.equal({
+                data: false
+              })
+            ])
+          })
+        })
+    })
+  })
 })
