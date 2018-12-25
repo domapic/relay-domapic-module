@@ -10,10 +10,15 @@ test.describe('server', () => {
   let gpio
   let abilities
 
-  test.before(() => {
+  test.before(async () => {
     domapic = new DomapicMocks()
+    domapic.stubs.module.config.get.resolves({
+      pressTime: 0
+    })
     gpio = new GpioMocks()
     require('../../server')
+    await domapic.utils.resolveOnStartCalled()
+    abilities = domapic.stubs.module.register.getCall(0).args[0]
   })
 
   test.after(() => {
@@ -30,10 +35,6 @@ test.describe('server', () => {
   })
 
   test.describe('when domapic module is returned', () => {
-    test.before(() => {
-      return domapic.utils.resolveOnStartCalled()
-    })
-
     test.it('should have created a new gpio', () => {
       test.expect(gpio.stubs.Constructor).to.have.been.calledWith(domapic.stubs.module)
     })
@@ -88,6 +89,24 @@ test.describe('server', () => {
     test.it('should not return data', async () => {
       const result = await abilities.toggle.action.handler()
       test.expect(result).to.be.undefined()
+    })
+  })
+
+  test.describe('shortPress action handler', () => {
+    test.before(() => {
+      gpio.stubs.instance.toggle.reset()
+      gpio.stubs.instance.setStatus.reset()
+    })
+
+    test.it('should call to toggle relay, and revert it again', done => {
+      gpio.stubs.instance.status = true
+      abilities.shortPress.action.handler().then(() => {
+        test.expect(gpio.stubs.instance.toggle).to.have.been.called()
+        setTimeout(() => {
+          test.expect(gpio.stubs.instance.setStatus).to.have.been.calledWith(true)
+          done()
+        }, 100)
+      })
     })
   })
 })
