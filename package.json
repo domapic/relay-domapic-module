@@ -1,6 +1,6 @@
 {
   "name": "relay-domapic-module",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Domapic module for controlling a relay",
   "main": "server.js",
   "bin": {
