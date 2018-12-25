@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 ### Removed
 
+## [1.3.0] - 2018-12-25
+### Added
+- Add "shortPress" configuration for homebridge plugin.
+
 ## [1.2.0] - 2018-12-25
 ### Added
 - Add "shortPress" ability, which inverts the relay status during a defined period of time.
