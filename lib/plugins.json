@@ -13,7 +13,10 @@
               },
               "set": {
                 "ability": "switch"
-              } 
+              },
+              "notify": {
+                "ability": "switch"
+              }
             }
           ]
         },
