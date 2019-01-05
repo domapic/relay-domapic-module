@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 ### Removed
 
+## [1.4.1] - 2019-01-05
+### Fixed
+- Avoid multiple simultaneous executions of shortPress action.
+
 ## [1.4.0] - 2018-12-30
 ### Added
 - Add notify capability to homekit switch accessory configuration

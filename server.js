@@ -20,6 +20,7 @@ domapic.createModule({
   packagePath: path.resolve(__dirname),
   customConfig: options
 }).then(async dmpcModule => {
+  let pressing = false
   const config = await dmpcModule.config.get()
   const relay = new gpioOut.Gpio(dmpcModule, {}, {
     gpio: GPIO,
@@ -66,10 +67,15 @@ domapic.createModule({
       action: {
         description: 'Inverts the relay status briefly',
         handler: async () => {
-          const currentStatus = relay.status
+          if (pressing) {
+            return Promise.resolve()
+          }
+          pressing = true
+          const previousStatus = relay.status
           await relay.toggle()
           setTimeout(() => {
-            relay.setStatus(currentStatus)
+            relay.setStatus(previousStatus)
+            pressing = false
           }, config[PRESS_TIME])
           return Promise.resolve()
         }

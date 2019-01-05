@@ -13,7 +13,7 @@ test.describe('server', () => {
   test.before(async () => {
     domapic = new DomapicMocks()
     domapic.stubs.module.config.get.resolves({
-      pressTime: 0
+      pressTime: 500
     })
     gpio = new GpioMocks()
     require('../../server')
@@ -105,8 +105,23 @@ test.describe('server', () => {
         setTimeout(() => {
           test.expect(gpio.stubs.instance.setStatus).to.have.been.calledWith(true)
           done()
-        }, 100)
+        }, 600)
       })
+    })
+
+    test.it('should not call to toggle relay more than once simultaneously', done => {
+      gpio.stubs.instance.status = true
+      gpio.stubs.instance.toggle.reset()
+      gpio.stubs.instance.setStatus.reset()
+
+      abilities.shortPress.action.handler()
+      abilities.shortPress.action.handler()
+      abilities.shortPress.action.handler()
+      setTimeout(() => {
+        test.expect(gpio.stubs.instance.toggle).to.have.been.calledOnce()
+        test.expect(gpio.stubs.instance.setStatus).to.have.been.calledWith(true)
+        done()
+      }, 600)
     })
   })
 })
