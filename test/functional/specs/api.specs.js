@@ -117,6 +117,28 @@ test.describe('switch api', function () {
       })
     })
 
+    test.it('should not invert relay status simultaneosly more than once', () => {
+      return Promise.all([
+        connection.request('/abilities/short-press/action', { method: 'POST' }),
+        connection.request('/abilities/short-press/action', { method: 'POST' }),
+        connection.request('/abilities/short-press/action', { method: 'POST' }),
+        connection.request('/abilities/short-press/action', { method: 'POST' })
+      ]).then(responses => {
+        return connection.request('/abilities/switch/state', {
+          method: 'GET'
+        }).then(statusResponse => {
+          return Promise.all([
+            test.expect(responses[0].statusCode).to.equal(200),
+            test.expect(responses[0].body).to.be.undefined(),
+            test.expect(statusResponse.statusCode).to.equal(200),
+            test.expect(statusResponse.body).to.deep.equal({
+              data: true
+            })
+          ])
+        })
+      })
+    })
+
     test.it('should have reverted status to original value', () => {
       return utils.waitOn(2000)
         .then(() => {
