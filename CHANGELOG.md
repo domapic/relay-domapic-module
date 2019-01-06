@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 ### Removed
 
+## [1.5.0] - 2019-01-06
+### Changed
+- Upgrade domapic-service version
+
 ## [1.4.1] - 2019-01-05
 ### Fixed
 - Avoid multiple simultaneous executions of shortPress action.
